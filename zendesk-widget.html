@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>ZE Widget</title>
+</head>
+
+<body>
+    <script id="ze-snippet"
+        src="https://static.zdassets.com/ekr/snippet.js?key=fb730aac-f509-4fb9-b90f-2d316c9d463f&"></script>
+    <script>
+        zE('messenger', 'open');
+        const urlParams = new URLSearchParams(window.location.search);
+        const queryString = urlParams.get('key');
+        console.log(queryString);
+        if (queryString && queryString !== '') {
+            zE('messenger', 'loginUser', function (callback) {
+                callback(queryString);
+            })
+        }
+    </script>
+</body>
+
+</html>
