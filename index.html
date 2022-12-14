@@ -20,6 +20,13 @@
                 callback(queryString);
             })
         }
+        zE('messenger:on', 'close', () => {
+            window.parent.postMessage(
+                JSON.stringify({
+                    event_code: "ym-client-event",
+                    data: "Widget Closed"
+                }), "*");
+        });
     </script>
 </body>
 
