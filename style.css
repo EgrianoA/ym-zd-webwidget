@@ -1,0 +1,29 @@
+body {
+    background-color: white;
+    height: 100vh;
+}
+
+
+.toggleButton {
+    display: none;
+    position: relative;
+    margin: auto;
+    top:50vh;
+    background-color: white;
+    border: solid 3px #ff8e24;
+    border-radius: 35px;
+    width: 280px;
+    height: 80px;
+    font-size: 17px;
+    text-align: center;
+    font-weight: bolder;
+    color: #eb7609;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 2px 4px 0px rgba(68, 68, 68, 0.2), 0 4px 20px 0 rgba(54, 54, 54, 0.19);
+}
+
+.toggleButton:hover {
+    background-color: #ff8e24;
+    color: white;
+}
