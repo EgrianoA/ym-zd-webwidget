@@ -13,6 +13,7 @@
     <script type="text/javascript">
         let widgetKey = 'f2d80132-163c-4ad4-858f-960bf79afac9'
         let lang = 'id'
+        let jwtKey = null
         const urlParams = new URLSearchParams(window.location.search);
         const key = urlParams.get('key');
         if (key && key !== '') {
@@ -25,15 +26,18 @@
             if (parsedPayload.lang && parsedPayload.lang !== '') {
                 lang = parsedPayload.lang
             }
+            if (parsedPayload.jwtKey && parsedPayload.jwtKey !== '') {
+                jwtKey = parsedPayload.jwtKey
+            }
         }
         const scriptUrl = `https://static.zdassets.com/ekr/snippet.js?key=${widgetKey}`
         var script = document.createElement('script');
         script.onload = () => {
             zE('messenger', 'open');
             zE('messenger:set', 'locale', lang);
-            if (parsedPayload.jwtKey && parsedPayload.jwtKey !== '') {
+            if (jwtKey && jwtKey !== '') {
                 zE('messenger', 'loginUser', function (callback) {
-                    callback(parsedPayload.jwtKey);
+                    callback(jwtKey);
                 })
             }
             zE('messenger:on', 'close', () => {
