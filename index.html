@@ -11,16 +11,24 @@
 <body>
     <button onclick="hideShow()" id="toggle-button" class="toggleButton">Continue to chat with Agent</button>
     <script type="text/javascript">
+        let widgetKey = 'f2d80132-163c-4ad4-858f-960bf79afac9'
+        let lang = 'id'
         const urlParams = new URLSearchParams(window.location.search);
         const key = urlParams.get('key');
         const decodedPayload = decodeURIComponent(key)
         const parsedPayload = JSON.parse(decodedPayload)
         console.log(parsedPayload)
-        const scriptUrl = `https://static.zdassets.com/ekr/snippet.js?key=${parsedPayload.widgetKey}`
+        if (parsedPayload.widgetKey && parsedPayload.widgetKey !== '') {
+            widgetKey = parsedPayload.widgetKey
+        }
+        if (parsedPayload.lang && parsedPayload.lang !== '') {
+            lang = parsedPayload.lang
+        }
+        const scriptUrl = `https://static.zdassets.com/ekr/snippet.js?key=${widgetKey}`
         var script = document.createElement('script');
         script.onload = () => {
             zE('messenger', 'open');
-            zE('messenger:set', 'locale', parsedPayload.lang);
+            zE('messenger:set', 'locale', lang);
             if (parsedPayload.jwtKey && parsedPayload.jwtKey !== '') {
                 zE('messenger', 'loginUser', function (callback) {
                     callback(parsedPayload.jwtKey);
