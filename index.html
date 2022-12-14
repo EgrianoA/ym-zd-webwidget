@@ -5,28 +5,53 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>ZE Widget</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <script id="ze-snippet"
-        src="https://static.zdassets.com/ekr/snippet.js?key=f2d80132-163c-4ad4-858f-960bf79afac9"></script>
-    <script>
-        zE('messenger', 'open');
+    <button onclick="hideShow()" id="toggle-button" class="toggleButton">Continue to chat with Agent</button>
+    <script type="text/javascript">
         const urlParams = new URLSearchParams(window.location.search);
-        const queryString = urlParams.get('key');
-        console.log(queryString);
-        if (queryString && queryString !== '') {
-            zE('messenger', 'loginUser', function (callback) {
-                callback(queryString);
-            })
+        const key = urlParams.get('key');
+        const decodedPayload = decodeURIComponent(key)
+        const parsedPayload = JSON.parse(decodedPayload)
+        console.log(parsedPayload)
+        const scriptUrl = `https://static.zdassets.com/ekr/snippet.js?key=${parsedPayload.widgetKey}`
+        var script = document.createElement('script');
+        script.onload = () => {
+            zE('messenger', 'open');
+            zE('messenger:set', 'locale', parsedPayload.lang);
+            if (parsedPayload.jwtKey && parsedPayload.jwtKey !== '') {
+                zE('messenger', 'loginUser', function (callback) {
+                    callback(parsedPayload.jwtKey);
+                })
+            }
+            zE('messenger:on', 'close', () => {
+                document.getElementById("toggle-button").style.display = "block"
+                console.log("WIDGET CLOSED")
+                window.parent.postMessage(
+                    JSON.stringify({
+                        event_code: "ym-client-event",
+                        data: "Widget Closed"
+                    }), "*");
+            });
         }
-        zE('messenger:on', 'close', () => {
-            window.parent.postMessage(
-                JSON.stringify({
-                    event_code: "ym-client-event",
-                    data: "Widget Closed"
-                }), "*");
-        });
+        script.setAttribute('src', scriptUrl)
+        script.setAttribute('id', "ze-snippet")
+        document.body.appendChild(script);
+
+
+        function hideShow() {
+            let toggle = document.getElementById("toggle-button").style.display;
+            console.log(toggle);
+
+            if (toggle == "none") {
+                document.getElementById("toggle-button").style.display = "block"
+            } else {
+                zE('messenger', 'open');
+                document.getElementById("toggle-button").style.display = "none"
+            }
+        }
     </script>
 </body>
 
