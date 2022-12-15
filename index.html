@@ -46,11 +46,11 @@
                     zE('messenger:on', 'close', () => {
                         document.getElementById("toggle-button").style.display = "block"
                         console.log("WIDGET CLOSED")
-                        window.parent.postMessage(
-                            JSON.stringify({
-                                event_code: "ym-client-event",
-                                data: "Widget Closed"
-                            }), "*");
+//                         window.parent.postMessage(
+//                             JSON.stringify({
+//                                 event_code: "ym-client-event",
+//                                 data: "Widget Closed"
+//                             }), "*");
                     });
                 }, 100)
             }, 100)
