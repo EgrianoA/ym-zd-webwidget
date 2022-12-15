@@ -34,25 +34,28 @@
         var script = document.createElement('script');
         script.onload = () => {
             zE('messenger:set', 'locale', lang);
-            zE('messenger', 'logoutUser');
             setTimeout(() => {
                 if (jwtKey && jwtKey !== '') {
-                    zE('messenger', 'loginUser', function (callback) {
-                        callback(jwtKey);
-                    })
+                    zE('messenger', 'logoutUser');
+                    setTimeout(() => {
+                        zE('messenger', 'loginUser', function (callback) {
+                            callback(jwtKey);
+                        })
+                    }, 100)
                 }
                 setTimeout(() => {
                     zE('messenger', 'open');
                     zE('messenger:on', 'close', () => {
                         document.getElementById("toggle-button").style.display = "block"
                         console.log("WIDGET CLOSED")
-//                         window.parent.postMessage(
-//                             JSON.stringify({
-//                                 event_code: "ym-client-event",
-//                                 data: "Widget Closed"
-//                             }), "*");
+                        // window.parent.postMessage(
+                        //     JSON.stringify({
+                        //         event_code: "ym-client-event",
+                        //         data: "Widget Closed"
+                        //     }), "*");
                     });
                 }, 100)
+
             }, 100)
         }
         script.setAttribute('src', scriptUrl)
