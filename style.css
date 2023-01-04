@@ -3,6 +3,13 @@ body {
     height: 100vh;
 }
 
+.backdrop {
+    background-color: white;
+    position: fixed;
+    width: 100vw;
+    height: 50px;
+    z-index: 99999999;
+}
 
 .toggleButton {
     display: none;
