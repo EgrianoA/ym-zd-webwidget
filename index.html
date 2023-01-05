@@ -33,16 +33,16 @@
         }
         const scriptUrl = `https://static.zdassets.com/ekr/snippet.js?key=${widgetKey}`
         var script = document.createElement('script');
-        script.onload = () => {
+//         script.onload = () => {
             zE('messenger:set', 'locale', lang);
             setTimeout(() => {
                 if (jwtKey && jwtKey !== '') {
                     zE('messenger', 'logoutUser');
-                    setTimeout(() => {
+//                     setTimeout(() => {
                         zE('messenger', 'loginUser', function (callback) {
                             callback(jwtKey);
                         })
-                    }, 0)
+//                     }, 0)
                 }
                 setTimeout(() => {
                     zE('messenger', 'open');
@@ -55,9 +55,9 @@
                         //         data: "Widget Closed"
                         //     }), "*");
                     });
-                }, 200)
+                }, 500)
 
-            }, 200)
+//             }, 200)
         }
         script.setAttribute('src', scriptUrl)
         script.setAttribute('id', "ze-snippet")
