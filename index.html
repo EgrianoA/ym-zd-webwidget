@@ -37,14 +37,22 @@
                 zE('messenger:set', 'locale', lang);
                 if (jwtKey && jwtKey !== '') {
                     zE('messenger', 'logoutUser');
-                    zE('messenger', 'loginUser', function (callback) {
-                        callback(jwtKey);
-                    })
                     setTimeout(() => {
-                        zE('messenger', 'open');
-                        zE('messenger:on', 'close', () => {
-                            document.getElementById("toggle-button").style.display = "block"
-                        });
+                        zE('messenger', 'loginUser', function (callback) {
+                            callback(jwtKey);
+                        }).then(() => {
+                            setTimeout(() => {
+                                zE('messenger', 'open');
+                                zE('messenger:on', 'close', () => {
+                                    document.getElementById("toggle-button").style.display = "block"
+                                });
+                            }, 500)
+                        }).catch(() => {
+                            zE('messenger', 'open');
+                            zE('messenger:on', 'close', () => {
+                                document.getElementById("toggle-button").style.display = "block"
+                            });
+                        })
                     }, 500)
                 } else {
                     zE('messenger', 'open');
