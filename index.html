@@ -42,7 +42,7 @@
                         zE('messenger', 'loginUser', function (callback) {
                             callback(jwtKey);
                         })
-                    }, 100)
+                    }, 0)
                 }
                 setTimeout(() => {
                     zE('messenger', 'open');
@@ -55,9 +55,9 @@
                         //         data: "Widget Closed"
                         //     }), "*");
                     });
-                }, 100)
+                }, 200)
 
-            }, 100)
+            }, 200)
         }
         script.setAttribute('src', scriptUrl)
         script.setAttribute('id', "ze-snippet")
