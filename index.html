@@ -40,19 +40,13 @@
                     setTimeout(() => {
                         zE('messenger', 'loginUser', function (callback) {
                             callback(jwtKey);
-                        }).then(() => {
-                            setTimeout(() => {
-                                zE('messenger', 'open');
-                                zE('messenger:on', 'close', () => {
-                                    document.getElementById("toggle-button").style.display = "block"
-                                });
-                            }, 500)
-                        }).catch(() => {
+                        })
+                        setTimeout(() => {
                             zE('messenger', 'open');
                             zE('messenger:on', 'close', () => {
                                 document.getElementById("toggle-button").style.display = "block"
                             });
-                        })
+                        }, 500)
                     }, 500)
                 } else {
                     zE('messenger', 'open');
