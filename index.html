@@ -21,14 +21,16 @@
             const decodedPayload = decodeURIComponent(key)
             const parsedPayload = JSON.parse(decodedPayload)
             console.log(parsedPayload)
-            if (parsedPayload.widgetKey && parsedPayload.widgetKey !== '') {
-                widgetKey = parsedPayload.widgetKey
-            }
-            if (parsedPayload.lang && parsedPayload.lang !== '') {
-                lang = parsedPayload.lang
-            }
-            if (parsedPayload.jwtKey && parsedPayload.jwtKey !== '') {
-                jwtKey = parsedPayload.jwtKey
+            if (parsedPayload) {
+                 if (parsedPayload.widgetKey && parsedPayload.widgetKey !== '') {
+                     widgetKey = parsedPayload.widgetKey
+                 }
+                 if (parsedPayload.lang && parsedPayload.lang !== '') {
+                     lang = parsedPayload.lang
+                 }
+                 if (parsedPayload.jwtKey && parsedPayload.jwtKey !== '') {
+                     jwtKey = parsedPayload.jwtKey
+                 }
             }
         }
         const scriptUrl = `https://static.zdassets.com/ekr/snippet.js?key=${widgetKey}`
