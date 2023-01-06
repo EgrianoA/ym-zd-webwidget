@@ -36,6 +36,7 @@
         const scriptUrl = `https://static.zdassets.com/ekr/snippet.js?key=${widgetKey}`
         var script = document.createElement('script');
         script.onload = () => {
+                zE('messenger', 'open');
                 zE('messenger:set', 'locale', lang);
                 if (jwtKey && jwtKey !== '') {
                     zE('messenger', 'logoutUser');
