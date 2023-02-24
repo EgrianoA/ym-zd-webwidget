@@ -36,8 +36,8 @@
         const scriptUrl = `https://static.zdassets.com/ekr/snippet.js?key=${widgetKey}`
         var script = document.createElement('script');
         script.onload = () => {
-                zE('messenger', 'open');
-                zE('messenger:set', 'locale', lang);
+//                 zE('messenger', 'open');
+//                 zE('messenger:set', 'locale', lang);
                 if (jwtKey && jwtKey !== '') {
                     zE('messenger', 'logoutUser');
                     setTimeout(() => {
@@ -46,6 +46,7 @@
                         })
                         setTimeout(() => {
                             zE('messenger', 'open');
+                            zE('messenger:set', 'locale', lang);
                             zE('messenger:on', 'close', () => {
                                 document.getElementById("toggle-button").style.display = "block"
                             });
@@ -53,6 +54,7 @@
                     }, 500)
                 } else {
                     zE('messenger', 'open');
+                    zE('messenger:set', 'locale', lang);
                     zE('messenger:on', 'close', () => {
                         document.getElementById("toggle-button").style.display = "block"
                     });
